@@ -3,14 +3,20 @@
 
 <!-- reuired external libraries -->
 <script src="node_modules/angular/angular.min.js"></script>
-<script src="node_modules/leaflet/dist/leaflet.css"></script>
+<link rel="stylesheet" href="node_modules/leaflet/dist/leaflet.css" />
 <script src="node_modules/leaflet/dist/leaflet.js"></script>
 <script src="node_modules/dom-to-image/dist/dom-to-image.min.js"></script>
 <script src="node_modules/file-saver/FileSaver.min.js"></script>
 <script src="node_modules/leaflet-easyprint/dist/bundle.js"></script>
+<script src="node_modules/angular-route/angular-route.min.js"></script>
 
-<body>
-    abcd
+
+<script src="app.js"></script>
+<script src="print-export/print-export.js"></script>
+
+
+<body ng-app="myApp">
+    <div ng-view></div>
 </body>
 
 </html>
