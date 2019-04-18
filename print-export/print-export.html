@@ -1,4 +1,28 @@
 <html>
-{{title}}
+<button ng-disabled="!orientation || !page" ng-click="exportImage(page,orientation)">Export Image</button>
+
+<select ng-change="changeOrientation(orientation)" ng-model="orientation">
+    <option value="">Select Orientation</option>
+    <option value="Portrait">Portrait</option>
+    <option value="Landscape">Landscape</option>
+</select>
+
+<select ng-change="ChangePageLayout(page)" ng-model="page">
+    <option value="">Select Page Type</option>
+    <option value="A0">A0</option>
+    <option value="A1">A1</option>
+    <option value="A2">A2</option>
+    <option value="A3">A3</option>
+    <option value="A4">A4</option>
+</select>
+<button ng-disabled="!orientation || !page" ng-click="printMyMap(page,orientation)">print</button>
+
+<div id="map"></div>
 
 </html>
+<style>
+    #map {
+        height: 500px;
+        width: 700px
+    }
+</style>
