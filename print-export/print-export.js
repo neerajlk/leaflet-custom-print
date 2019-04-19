@@ -23,12 +23,49 @@ app.controller('printExportCtrl', function ($scope) {
     }
 
     $scope.printMyMap = function (layout, orientation) {
-        a3Size.className = 'A4' + orientation + ' ' + 'page'
-        L.easyPrint({
-            hidden: true,
-            sizeModes: [layout + orientation],
-            tileLayer: tileLayer
-        }).addTo(map).printMap(layout + orientation + ' ' + 'page', 'MyFileName')
+
+
+        var _print = L.control.browserPrint({
+            title: 'Just print me!',
+            printModes: [
+                // L.control.browserPrint.mode(orientation,orientation+'-'+layout,layout,'',false)
+                L.control.browserPrint.mode.landscape(),
+                L.control.browserPrint.mode.portrait()
+            ],
+            manualMode: false
+        });
+
+        _print.addTo(map);
+
+        for (var i = 0; i < _print.options.printModes.length; i++) {
+            if (_print.options.printModes[i].Mode == orientation) {
+                _print.options.printModes[i].PageSize = layout;
+                _print.options.printModes[i].PageSeries = layout[0];
+                _print.options.printModes[i].PageSeriesSize = layout[1];
+                console.log(_print.options.printModes[i])
+            }
+        }
+        _print.print(orientation)
+
+
+        // L.easyPrint({
+        //     hidden: true,
+        //     sizeModes: [layout + orientation],
+        //     tileLayer: tileLayer
+        // }).addTo(map).printMap(layout + orientation + ' ' + 'page', 'MyFileName')
+
+
+        //     L.control.browserPrint({
+        //         title: 'Just print me!',
+        //         // printLayer: tileLayer,
+        //         closePopupsOnPrint: false,
+        //         printModes: [
+        //             L.control.browserPrint.mode(orientation,orientation+'-'+layout,layout) 
+        //         ],
+        //         manualMode: false
+
+        // }).addTo(map)
+
     }
 
 })
