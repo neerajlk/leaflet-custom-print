@@ -1,4 +1,138 @@
 <html>
-{{title}}
+<button ng-disabled="!orientation || !page" ng-click="exportImage(page,orientation)">Export Image</button>
+
+<select ng-change="changeOrientation(orientation)" ng-model="orientation">
+    <option value="">Select Orientation</option>
+    <option value="Portrait">Portrait</option>
+    <option value="Landscape">Landscape</option>
+</select>
+
+<select ng-change="ChangePageLayout(page)" ng-model="page">
+    <option value="">Select Page Type</option>
+    <option value="A1">A1</option>
+    <option value="A2">A2</option>
+    <option value="A3">A3</option>
+    <option value="A4">A4</option>
+</select>
+<button ng-disabled="!orientation || !page" ng-click="printMyMap(page,orientation)">print</button>
+
+<div class="row m-0"></div>
+<div class="col-2 pr-0">
+    <div class="mt-2 mb-2 legends" leaflet-browser-print-content>
+        <h6 class="form-check-label pt-1 font-weight-bold" style="font-size: 16px" for="">
+            Legend
+        </h6>
+        <div class="mt-3">
+            <ul ng-repeat="layers in activeLayers" class="pl-0 list-unstyled legend-items row">
+                <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2" ng-switch="layers.type">
+                    <div style="color:{{layers.color}}" ng-switch-when="point">
+                        <!-- <i class="fa fa-circle" aria-hidden="true"></i> -->
+                        <img src="./print-export/hexagon_filled_green.png" width="15" crossorigin>
+                    </div>
+                    <div style="color:{{layers.color}}" ng-switch-when="polyline">
+                        <i class="fa fa-minus" aria-hidden="true"></i>
+                    </div>
+                    <div style="color:{{layers.color}}" ng-switch-when="polygon">
+                        <i class="fa fa-stop" aria-hidden="true"></i>
+                        <i class="far fa-square"></i>
+                    </div>
+                </div>
+                <div class="col-sm-10 col-md-10 col-lg-10 col-xl-10">
+                    <!-- <li> {{layers.name}}</li> -->
+                    {{layers.name}}
+                </div>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="col mr-3">
+    <div>
+        <div id="map" class="map-preview"></div>
+    </div>
+    <div class="mt-2 sub-content" leaflet-browser-print-content>
+        <h6 class="align-middle my-3" style="font-size: 24px">{{title}}</h6>
+        <p style="font-size: 16px">{{comment}}</p>
+    </div>
+</div>
+</div>
+
+<!-- <div id="map"></div> -->
+
+
 
 </html>
+<style>
+    #map {
+        height: 75vh;
+    }
+
+    .leaflet-control-browser-print {
+        display: none !important;
+    }
+</style>
+
+
+<!-- <style leaflet-browser-print-content>
+      .grid-print-container {
+        grid-template: auto 1fr auto / 1fr;
+    }
+
+    .grid-map-print {
+        grid-row: 2;
+    }
+
+    .grid-print-container .legends {
+        grid-row: 6;
+    }
+
+    .grid-print-container .legends .legend-items {
+        display: grid;
+        grid-template-columns: auto auto auto;
+    }
+
+    .grid-print-container .sub-content {
+        grid-row: 5;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .north-direction-arrow {
+        position: absolute;
+        bottom: 0;
+        right: 10px;
+        z-index: 2;
+    }
+</style> -->
+
+<style leaflet-browser-print-content>
+    .grid-print-container {
+        grid-template: auto 1fr auto / 1fr;
+    }
+
+    .grid-map-print {
+        grid-row: 2;
+    }
+
+    .grid-print-container .legends {
+        grid-row: 2;
+        padding-left: 10px;
+        float: left !important
+    }
+
+    .grid-print-container .legends .legend-items {
+        display: grid;
+        padding-left: 10px;
+        grid-template-columns: auto auto auto;
+    }
+
+    .title {
+        grid-row: 1;
+        justify-self: center;
+        color: white;
+    }
+
+    .sub-content {
+        grid-row: 5;
+        padding-left: 10px;
+    }
+</style>
