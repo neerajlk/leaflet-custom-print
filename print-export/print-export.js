@@ -108,8 +108,8 @@ app.controller('printExportCtrl', function ($scope) {
     $scope.activeLayers = [{
         type: "point",
         color: "green",
-        name:"cities in India",
-        symbol_url :'/print-export/hexagon_filled_green.png'
+        name: "Cities in India",
+        symbol_url: '/print-export/hexagon_filled_green.png'
     }]
 
     $scope.title = 'This is a Title';
