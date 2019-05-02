@@ -13,22 +13,12 @@ app.controller('printExportCtrl', function ($scope) {
         $scope.page = layoutParam
     }
 
-    $scope.exportImage = function (layout, orientation) {
-        L.easyPrint({
-            hidden: true,
-            sizeModes: [layout + orientation],
-            tileLayer: tileLayer,
-            exportOnly: true
-        }).addTo(map).printMap(layout + orientation + ' ' + 'page', 'MyFileName')
-    }
-
     $scope.printMyMap = function (layout, orientation) {
 
 
         var _print = L.control.browserPrint({
             title: 'Just print me!',
             printModes: [
-                // L.control.browserPrint.mode(orientation,orientation+'-'+layout,layout,'',false)
                 L.control.browserPrint.mode.landscape('Landscape Print', layout),
                 L.control.browserPrint.mode.portrait('portrait Print', layout),
             ],
@@ -42,29 +32,9 @@ app.controller('printExportCtrl', function ($scope) {
                 _print.options.printModes[i].PageSize = layout;
                 _print.options.printModes[i].PageSeries = layout[0];
                 _print.options.printModes[i].PageSeriesSize = layout[1];
-                console.log(_print.options.printModes[i])
             }
         }
         _print.print(orientation)
-
-        // L.easyPrint({
-        //     hidden: true,
-        //     sizeModes: [layout + orientation],
-        //     tileLayer: tileLayer
-        // }).addTo(map).printMap(layout + orientation + ' ' + 'page', 'MyFileName')
-
-
-        //     L.control.browserPrint({
-        //         title: 'Just print me!',
-        //         // printLayer: tileLayer,
-        //         closePopupsOnPrint: false,
-        //         printModes: [
-        //             L.control.browserPrint.mode(orientation,orientation+'-'+layout,layout) 
-        //         ],
-        //         manualMode: false
-
-        // }).addTo(map)
-
     }
 
 
@@ -99,7 +69,6 @@ app.controller('printExportCtrl', function ($scope) {
     ]
 
     for (var i = 0; i < locations.length; i++) {
-        console.log('here')
         marker = new L.marker([locations[i][1], locations[i][2]], { icon: greenIcon })
             .bindPopup(locations[i][0])
             .addTo(map);

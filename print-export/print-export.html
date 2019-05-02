@@ -1,6 +1,4 @@
 <html>
-<button ng-disabled="!orientation || !page" ng-click="exportImage(page,orientation)">Export Image</button>
-
 <select ng-change="changeOrientation(orientation)" ng-model="orientation">
     <option value="">Select Orientation</option>
     <option value="Portrait">Portrait</option>
@@ -14,7 +12,7 @@
     <option value="A3">A3</option>
     <option value="A4">A4</option>
 </select>
-<button ng-disabled="!orientation || !page" ng-click="printMyMap(page,orientation)">print</button>
+<button ng-disabled="!orientation || !page" ng-click="printMyMap(page,orientation)">Print Preview</button>
 
 <div class="row m-0"></div>
 <div class="col-2 pr-0">
@@ -38,7 +36,6 @@
                     </div>
                 </div>
                 <div class="col-sm-10 col-md-10 col-lg-10 col-xl-10">
-                    <!-- <li> {{layers.name}}</li> -->
                     {{layers.name}}
                 </div>
             </ul>
@@ -56,7 +53,7 @@
 </div>
 </div>
 
-<!-- <div id="map"></div> -->
+
 
 
 
