@@ -17,7 +17,6 @@ app.controller('printExportCtrl', function ($scope) {
 
 
         var _print = L.control.browserPrint({
-            title: 'Just print me!',
             printModes: [
                 L.control.browserPrint.mode.landscape('Landscape Print', layout),
                 L.control.browserPrint.mode.portrait('portrait Print', layout),
@@ -77,8 +76,10 @@ app.controller('printExportCtrl', function ($scope) {
     $scope.activeLayers = [{
         type: "point",
         color: "green",
-        name: "Cities in India",
-        symbol_url: '/print-export/hexagon_filled_green.png'
+        name:"Cities in India",
+        layerName: "Cities in India",
+        symbology_type : '2',
+        symbol_url: 'http://localhost/leaflet-custom-print/print-export/hexagon_filled_green.png'
     }]
 
     $scope.title = 'This is a Title';
